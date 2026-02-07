@@ -1,4 +1,15 @@
+VISTA\Main.class
 CONTROLADOR\GestionCelulares.class
+MODELO\Marca.class
 VISTA\menuCliente.class
 CONTROLADOR\GestionCliente.class
+MODELO\Celular$gama.class
+CONTROLADOR\Conexion.class
+MODELO\Venta.class
+MODELO\Celular.class
+MODELO\Persona.class
+MODELO\Celular$sistema_operativo.class
+MODELO\Detalle_venta.class
+MODELO\Modelo.class
 CONTROLADOR\Clienteimpl.class
+MODELO\Cliente.class

@@ -1,7 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
 package VISTA;
 
 import java.util.Scanner;
@@ -9,7 +8,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        int op=0;
+        int op = 0;
         do {
             System.out.println("""
                            ===========================
@@ -28,26 +27,26 @@ public class Main {
             }
             switch (op) {
                 case 1:
-                    
+
                     break;
                 case 2:
-                    menuCliente m=new menuCliente();
+                    menuCliente m = new menuCliente();
                     m.menucliente();
                     break;
                 case 3:
-                    
+
                     break;
-                case 4: 
-                    
+                case 4:
+
                     break;
                 case 5:
-                    
+
                     break;
                 case 6:
                     System.out.println("Gracias por usar nuestro sistema!");
                     break;
-                
+
             }
-        } while (op != 6);   
+        } while (op != 6);
     }
 }

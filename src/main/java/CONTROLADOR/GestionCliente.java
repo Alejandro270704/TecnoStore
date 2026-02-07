@@ -4,14 +4,14 @@
  */
 package CONTROLADOR;
 
-import MODELO.Cliente;
+import MODELO.Persona;
 import java.util.ArrayList;
 
 
 public interface GestionCliente {
-    void guardar (Cliente cl);
-    void actualizar(Cliente cl );
+    void guardar (Persona p);
+    void actualizar(Persona p );
     void eliminar (int id);
-    Cliente buscar(int id);
-    ArrayList<Cliente>listar();
+    Persona buscar(int id);
+    ArrayList<Persona>listar();
 }
