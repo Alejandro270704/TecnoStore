@@ -5,24 +5,17 @@
 package MODELO;
 
 public class Celular {
-    private Marca marca_id;
     private Modelo modelo_id;
     private enum sistema_operativo{Android,iOS,WindowsPhone,BlackBerry,HarmonyOS};
     private enum gama{alta,media,baja};
     private int stock ;
 
-    public Celular(Marca marca_id, Modelo modelo_id, int stock) {
-        this.marca_id = marca_id;
+    public Celular(Modelo modelo_id, int stock) {
         this.modelo_id = modelo_id;
         this.stock = stock;
     }
 
-    public Marca getMarca_id() {
-        return marca_id;
-    }
-
-    public void setMarca_id(Marca marca_id) {
-        this.marca_id = marca_id;
+    public Celular() {
     }
 
     public Modelo getModelo_id() {
@@ -40,6 +33,8 @@ public class Celular {
     public void setStock(int stock) {
         this.stock = stock;
     }
+
+    
 
    
 

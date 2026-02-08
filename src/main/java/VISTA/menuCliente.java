@@ -73,6 +73,10 @@ public class menuCliente {
 
     private void listar() {
         ArrayList<Persona> personas = gc.listar();
+        if (personas.isEmpty()) {
+            System.out.println("no hay clientes registrados");
+            return;
+        }
         personas.forEach(n -> {
             System.out.println("-----------------------------");
             System.out.println("ID: " + n.getId());
@@ -86,6 +90,10 @@ public class menuCliente {
     }
 
     private void actualizar() {
+        ArrayList<Persona> personas = gc.listar();
+        if (personas.isEmpty()) {
+            return;
+        }
         Persona p= null;
          do {
         System.out.println("Ingrese el numero del cliente a actualizar:");
@@ -99,7 +107,7 @@ public class menuCliente {
         
         
         System.out.println("""
-                               Ingrese lo quiere modificar
+                               Ingrese el numero de lo quiere modificar
                                1.   Nombre
                                2.   Identificacion
                                3.   Correo
@@ -133,6 +141,10 @@ public class menuCliente {
     }
 
     private void eliminar() {
+        ArrayList<Persona> personas = gc.listar();
+        if (personas.isEmpty()) {
+            return;
+        }
         Persona p= null;
         int id=0;
          do {

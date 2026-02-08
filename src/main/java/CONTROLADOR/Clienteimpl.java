@@ -107,9 +107,6 @@ public class Clienteimpl implements GestionCliente {
             }
         } catch (SQLException e) {
         }
-        if (personas.isEmpty()) {
-            System.out.println("no hay clientes registrados");
-        }
         return personas;
 
     }

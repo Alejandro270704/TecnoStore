@@ -6,10 +6,43 @@ package MODELO;
 
 
 public class Marca {
-    private int nombre_marca;
+    private int id;
+    private String nombre_marca;
 
-    public Marca(int nombre_marca) {
+    public Marca() {
+    }
+
+    public Marca(int id, String nombre_marca) {
+        this.id = id;
         this.nombre_marca = nombre_marca;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre_marca() {
+        return nombre_marca;
+    }
+
+    public void setNombre_marca(String nombre_marca) {
+        this.nombre_marca = nombre_marca;
+    }
+
+    
+
+    @Override
+    public String toString() {
+        return"""
+              ID: %s
+              NOMBRE: %s
+              """.formatted(id,nombre_marca);
+    }
+
+    
     
 }

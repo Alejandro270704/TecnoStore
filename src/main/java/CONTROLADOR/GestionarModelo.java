@@ -4,12 +4,14 @@
  */
 package CONTROLADOR;
 
-import MODELO.Celular;
+import MODELO.Modelo;
 import java.util.ArrayList;
 
-public interface GestionCelulares {
-    void guardar (Celular cel);
-    void actualizar(Celular cel ,int id);
-    void eliminar (int id);
-    ArrayList<Celular>listar();
+
+public interface GestionarModelo {
+    void registrar(Modelo m);
+    void actualizar(Modelo m);
+    Modelo buscar(int id);
+    void eliminar(int id);
+    ArrayList<Modelo>listar();
 }
