@@ -63,9 +63,22 @@ public class menuCliente {
         System.out.println("Ingrese el nombre:");
         cl.setNombre(new Scanner(System.in).nextLine());
         System.out.println("Ingrese su identificacion:");
-        cl.setIdentificacion(new Scanner(System.in).nextLine());
+        String identificacion = new Scanner(System.in).nextLine();
+        for (Persona p: gc.listar()) {
+            while (p.getIdentificacion().equals(identificacion)) {
+                System.out.println("Identificacion repetida ingrese otra:");
+                identificacion = new Scanner(System.in).nextLine();
+            }
+        }
+        cl.setIdentificacion(identificacion);
         System.out.println("Ingrese el correo:");
-        cl.setCorreo(new Scanner(System.in).nextLine());
+        String correo = new Scanner(System.in).nextLine();
+        while (!correo.contains("@")|| !correo.contains(".")) {
+            System.out.println("correo invalido");
+            System.out.println("ingrese el correo:");
+            correo = new Scanner(System.in).nextLine();
+        }
+        cl.setCorreo(correo);
         System.out.println("ingrese el numero de telefono");
         cl.setTelefono(new Scanner(System.in).nextLine());
         gc.guardar(cl);
@@ -94,18 +107,17 @@ public class menuCliente {
         if (personas.isEmpty()) {
             return;
         }
-        Persona p= null;
-         do {
-        System.out.println("Ingrese el numero del cliente a actualizar:");
-        int id = new Scanner(System.in).nextInt();
-        p = gc.buscar(id);
-        if (p == null) {
-            System.out.println("No existe este cliente, intente otra vez.");
-        }
+        Persona p = null;
+        do {
+            System.out.println("Ingrese el numero del cliente a actualizar:");
+            int id = new Scanner(System.in).nextInt();
+            p = gc.buscar(id);
+            if (p == null) {
+                System.out.println("No existe este cliente, intente otra vez.");
+            }
 
-    } while (p == null);
-        
-        
+        } while (p == null);
+
         System.out.println("""
                                Ingrese el numero de lo quiere modificar
                                1.   Nombre
@@ -145,17 +157,17 @@ public class menuCliente {
         if (personas.isEmpty()) {
             return;
         }
-        Persona p= null;
-        int id=0;
-         do {
-        System.out.println("Ingrese el numero del cliente a eliminar:");
-        id = new Scanner(System.in).nextInt();
-        p = gc.buscar(id);
-        if (p == null) {
-            System.out.println("No existe este cliente, intente otra vez.");
-        }
+        Persona p = null;
+        int id = 0;
+        do {
+            System.out.println("Ingrese el numero del cliente a eliminar:");
+            id = new Scanner(System.in).nextInt();
+            p = gc.buscar(id);
+            if (p == null) {
+                System.out.println("No existe este cliente, intente otra vez.");
+            }
 
-    } while (p == null);
+        } while (p == null);
         gc.eliminar(id);
     }
 

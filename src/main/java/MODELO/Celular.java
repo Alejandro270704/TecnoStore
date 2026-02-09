@@ -5,17 +5,40 @@
 package MODELO;
 
 public class Celular {
-    private Modelo modelo_id;
-    private enum sistema_operativo{Android,iOS,WindowsPhone,BlackBerry,HarmonyOS};
-    private enum gama{alta,media,baja};
-    private int stock ;
 
-    public Celular(Modelo modelo_id, int stock) {
+    private int id;
+    private Modelo modelo_id;
+    private sistema_operativo sistema_operativo;
+    private gama gama;
+    private double precio;
+    private int stock;
+
+    public Celular() {
+    }
+
+    public enum sistema_operativo {
+        Android, iOS, WindowsPhone, BlackBerry, HarmonyOS
+    }
+
+    public enum gama {
+        alta, media, baja
+    }
+
+    public Celular(int id, Modelo modelo_id, sistema_operativo sistema_operativo, gama gama, double precio, int stock) {
+        this.id = id;
         this.modelo_id = modelo_id;
+        this.sistema_operativo = sistema_operativo;
+        this.gama = gama;
+        this.precio = precio;
         this.stock = stock;
     }
 
-    public Celular() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Modelo getModelo_id() {
@@ -26,6 +49,30 @@ public class Celular {
         this.modelo_id = modelo_id;
     }
 
+    public sistema_operativo getSistema_operativo() {
+        return sistema_operativo;
+    }
+
+    public void setSistema_operativo(sistema_operativo sistema_operativo) {
+        this.sistema_operativo = sistema_operativo;
+    }
+
+    public gama getGama() {
+        return gama;
+    }
+
+    public void setGama(gama gama) {
+        this.gama = gama;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
     public int getStock() {
         return stock;
     }
@@ -34,10 +81,17 @@ public class Celular {
         this.stock = stock;
     }
 
-    
+    public String toString() {
+        return """
+           ID: %s
+           Modelo: %s
+           Marca: %s
+           SO: %s
+           Gama: %s
+           Precio: %s
+           Stock: %s
+           ---------------------------
+           """.formatted(id,modelo_id.getNombre_modelo(),modelo_id.getMarca_id().getNombre_marca(),sistema_operativo,gama,precio,stock);
+    }
 
-   
-
-
-  
 }
