@@ -39,7 +39,8 @@ public class Main {
                     mv.menuventa();
                     break;
                 case 4:
-
+                    menuReportes mr= new menuReportes();
+                    mr.menureportes();
                     break;
                 case 5:
 

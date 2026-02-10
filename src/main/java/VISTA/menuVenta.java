@@ -55,9 +55,10 @@ public class menuVenta {
                     listar();
                     break;
                 case 3:
-
+                    actualizar();
                     break;
                 case 4:
+                    eliminar();
                     break;
                 case 5:
                     System.out.println("volviendo al menu");
@@ -85,7 +86,7 @@ public class menuVenta {
         System.out.println("ingrese el numero del celular");
         int idcel = new Scanner(System.in).nextInt();
         Celular cel = gcl.buscar(idcel);
-        
+
         System.out.println("ingrese cuantos celulares se realizo en la compra");
         int cantidad = new Scanner(System.in).nextInt();
         if (cel.getStock() < cantidad) {
@@ -106,7 +107,7 @@ public class menuVenta {
         dv.setSubtotal(subtotal);
         gcl.actualizarStock(cel.getId(), cantidad);
         gdv.guardar(dv);
-        
+
     }
 
     private void listar() {
@@ -115,18 +116,150 @@ public class menuVenta {
             System.out.println("no hay ventas registrados");
             return;
         }
-        ventas.forEach(n -> System.out.println(n));    
-        
-  
+        ventas.forEach(n -> System.out.println(n));
 
     }
 
     private void actualizar() {
-              // en construccion
+        ArrayList<Detalle_venta> ventas = gdv.listar();
+        if (ventas.isEmpty()) {
+            return;
+        }
+        ventas.forEach(v -> System.out.println(v));
 
+        Detalle_venta dv = null;
+        Venta v = null;
+        do {
+            System.out.println("Ingrese el ID de la venta a actualizar:");
+            int idVenta = new Scanner(System.in).nextInt();
+            dv = gdv.buscar(idVenta);
+            if (dv == null) {
+                System.out.println("No existe esta venta, intente otra vez.");
+            } else {
+                v = gv.buscar(idVenta);
+            }
+        } while (dv == null);
+
+        Celular cel = dv.getId_celular();
+        int cantidad = dv.getCantidad();
+
+        int op = 0;
+        do {
+            System.out.println("""
+                       ===========================
+                           ¿que desea actualizar?
+                       ===========================
+                       1.   actualizar el cliente
+                       2.   actualizar celular
+                       3.   actualizar cantidad
+                       4.   atras
+                       ===========================
+                       """);
+            op = new Scanner(System.in).nextInt();
+            while (op < 1 || op > 4) {
+                System.out.println("Error, opcion no valida");
+                op = new Scanner(System.in).nextInt();
+            }
+            double subtotalNuevo = 0;
+            double totalNuevo = 0;
+            switch (op) {
+                case 1:
+                    for (Persona p : gc.listar()) {
+                        System.out.println(p);
+                    }
+                    System.out.println("Ingrese el nuevo ID del cliente:");
+                    int idCliente = new Scanner(System.in).nextInt();
+
+                    Cliente cliente = new Cliente();
+                    cliente.setId(idCliente);
+                    v.setId_cliente(cliente);
+
+                    gv.actualizar(v, v.getId());
+
+                    System.out.println("Cliente actualizado correctamente.");
+                    break;
+
+                case 2:
+                    for (Celular c : gcl.listar()) {
+                        System.out.println(c);
+                    }
+
+                    System.out.println("Ingrese el nuevo ID del celular:");
+                    int idCelular = new Scanner(System.in).nextInt();
+
+                    Celular Cel = gcl.buscar(idCelular);
+
+                    if (Cel == null) {
+                        System.out.println("El celular ingresado no existe");
+                        break;
+                    }
+
+                    gcl.actualizarStock(cel.getId(), cantidad);
+
+                    if (Cel.getStock() < cantidad) {
+                        System.out.println("No hay stock suficiente del nuevo celular");
+                        gcl.actualizarStock(cel.getId(), -cantidad);
+                        break;
+                    }
+
+                    subtotalNuevo = gdv.calcularSubtotal(cantidad, Cel.getPrecio());
+                    totalNuevo = gv.calculartotal(subtotalNuevo);
+
+                    dv.setId_celular(Cel);
+                    dv.setSubtotal(subtotalNuevo);
+                    v.setTotal(totalNuevo);
+
+                    gdv.actualizar(dv, dv.getId());
+                    gv.actualizar(v, v.getId());
+
+                    gcl.actualizarStock(Cel.getId(), cantidad);
+
+
+                    System.out.println("Celular actualizado correctamente.");
+                    break;
+
+                case 3:
+                    System.out.println("Ingrese la nueva cantidad:");
+                    int nuevaCantidad = new Scanner(System.in).nextInt();
+
+                    Celular celBD = gcl.buscar(cel.getId());
+
+                    int stockDisponible = celBD.getStock() + cantidad;
+
+
+                    if (stockDisponible < nuevaCantidad) {
+                        System.out.println("No hay stock suficiente");
+                        break;
+                    }
+
+                    int diferencia = nuevaCantidad - cantidad;
+
+                    gcl.actualizarStock(cel.getId(), diferencia);
+
+                    subtotalNuevo = gdv.calcularSubtotal(nuevaCantidad, celBD.getPrecio());
+                    totalNuevo = gv.calculartotal(subtotalNuevo);
+
+                    dv.setCantidad(nuevaCantidad);
+                    dv.setSubtotal(subtotalNuevo);
+                    v.setTotal(totalNuevo);
+
+                    cantidad = nuevaCantidad;
+                    cel = celBD;
+
+                    gdv.actualizar(dv, dv.getId());
+                    gv.actualizar(v, v.getId());
+
+                    System.out.println("stock actualizado ");
+                    break;
+
+                case 4:
+                    System.out.println("atras");
+                    break;
+            }
+
+        } while (op != 4);
     }
 
     private void eliminar() {
-       // en construccion
     }
 }

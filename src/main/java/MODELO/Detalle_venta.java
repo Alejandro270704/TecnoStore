@@ -64,8 +64,8 @@ public class Detalle_venta {
     }
 
     @Override
-public String toString() {
-    return String.format("""
+    public String toString() {
+        return String.format("""
         ----------------------------
                   VENTA
         ----------------------------
@@ -86,20 +86,20 @@ public String toString() {
         Total + iva: %s
         ----------------------------
         """,
-        id_venta.getId(),
-        id_venta.getId_cliente().getNombre(),
-        id_venta.getFecha(),
-        id_celular.getId(),
-        id_celular.getModelo_id().getNombre_modelo(),
-        id_celular.getModelo_id().getMarca_id().getNombre_marca(),
-        id_celular.getSistema_operativo() ,
-        id_celular.getGama(),
-        id_celular.getPrecio(),
-        id_celular.getStock(),
-        cantidad,
-        subtotal,
-        id_venta.getTotal()
-    );
-}
+                id_venta.getId(),
+                id_venta.getId_cliente().getNombre(),
+                id_venta.getFecha(),
+                id_celular.getId(),
+                id_celular.getModelo_id().getNombre_modelo(),
+                id_celular.getModelo_id().getMarca_id().getNombre_marca(),
+                id_celular.getSistema_operativo(),
+                id_celular.getGama(),
+                id_celular.getPrecio(),
+                id_celular.getStock(),
+                cantidad,
+                subtotal,
+                id_venta.getTotal()
+        );
+    }
 
 }
