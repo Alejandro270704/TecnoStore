@@ -24,8 +24,8 @@ public class Celularimpl implements GestionCelulares {
         try (Connection con = c.conectar()) {
             PreparedStatement ps = con.prepareStatement("insert into celular(modelo_id, sistema_operativo, gama ,precio,stock) values (?,?,?,?,?)");
             ps.setInt(1, cel.getModelo_id().getId());
-            ps.setString(2, cel.getSistema_operativo().name());
-            ps.setString(3, cel.getGama().name());
+            ps.setString(2, cel.getSistemaenum());
+            ps.setString(3, cel.getGamaenum());
             ps.setDouble(4, cel.getPrecio());
             ps.setInt(5, cel.getStock());
             ps.executeUpdate();
@@ -40,8 +40,8 @@ public class Celularimpl implements GestionCelulares {
         try (Connection con = c.conectar()) {
             PreparedStatement ps = con.prepareStatement("update celular set modelo_id=?, sistema_operativo=?, gama=?, precio=?, stock=?  where id=?");
             ps.setInt(1, cel.getModelo_id().getId());
-            ps.setString(2, cel.getSistema_operativo().name());
-            ps.setString(3, cel.getGama().name());
+            ps.setString(2, cel.getSistemaenum());
+            ps.setString(3, cel.getGamaenum());
             ps.setDouble(4, cel.getPrecio());
             ps.setInt(5, cel.getStock());
             ps.setInt(6, cel.getId()); // 
@@ -86,7 +86,7 @@ public class Celularimpl implements GestionCelulares {
             if (rs.next()) {
                 cel = new Celular();
                 cel.setId(rs.getInt(1));
-                String sistema = rs.getString(2); 
+                String sistema = rs.getString(2);
                 cel.setSistema_operativo(Celular.sistema_operativo.valueOf(sistema));
 
                 String gama = rs.getString(3); // columna gama
@@ -114,32 +114,47 @@ public class Celularimpl implements GestionCelulares {
             ResultSet rs = st.executeQuery("select c.id, c.sistema_operativo, c.gama, c.precio, c.stock, m.id as modelo_id, m.nombre_modelo, mc.id as marca_id, mc.nombre_marca from celular c inner join modelo m on c.modelo_id = m.id inner join marca mc on m.marca_id = mc.id");
             while (rs.next()) {
 
-            Celular cel = new Celular();
-            cel.setId(rs.getInt(1));
+                Celular cel = new Celular();
+                cel.setId(rs.getInt(1));
 
-            cel.setSistema_operativo(Celular.sistema_operativo.valueOf(rs.getString(2)));
-            cel.setGama(Celular.gama.valueOf(rs.getString(3)));
+                cel.setSistema_operativo(Celular.sistema_operativo.valueOf(rs.getString(2)));
+                cel.setGama(Celular.gama.valueOf(rs.getString(3)));
 
-            cel.setPrecio(rs.getDouble(4));
-            cel.setStock(rs.getInt(5));
+                cel.setPrecio(rs.getDouble(4));
+                cel.setStock(rs.getInt(5));
 
-            Modelo m = new Modelo();
-            m.setId(rs.getInt(6));
-            m.setNombre_modelo(rs.getString(7));
+                Modelo m = new Modelo();
+                m.setId(rs.getInt(6));
+                m.setNombre_modelo(rs.getString(7));
 
-            Marca mc = new Marca();
-            mc.setId(rs.getInt(8));
-            mc.setNombre_marca(rs.getString(9));
+                Marca mc = new Marca();
+                mc.setId(rs.getInt(8));
+                mc.setNombre_marca(rs.getString(9));
 
-            m.setMarca_id(mc);
-            cel.setModelo_id(m);
+                m.setMarca_id(mc);
+                cel.setModelo_id(m);
 
-            celulares.add(cel);
+                celulares.add(cel);
             }
 
         } catch (SQLException e) {
         }
         return celulares;
+    }
+
+    @Override
+    public void actualizarStock(int idCelular, int cantidadVendida) {
+
+        try (Connection con = c.conectar()) {
+            PreparedStatement ps = con.prepareStatement("update celular set stock = stock - ? where id = ?");
+            ps.setInt(1, cantidadVendida);
+            ps.setInt(2, idCelular);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 }

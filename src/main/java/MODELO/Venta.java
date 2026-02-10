@@ -8,14 +8,25 @@ import java.time.LocalDate;
 
 
 public class Venta {
+    private int id;
     private Cliente id_cliente;
     private LocalDate fecha;
     private double total;
-
-    public Venta(Cliente id_cliente, LocalDate fecha, double total) {
+    
+    public Venta(int id, Cliente id_cliente, LocalDate fecha, double total) {
+        this.id = id;
         this.id_cliente = id_cliente;
         this.fecha = fecha;
         this.total = total;
+    }
+    public Venta(){
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Cliente getId_cliente() {
@@ -41,5 +52,24 @@ public class Venta {
     public void setTotal(double total) {
         this.total = total;
     }
+    @Override
+    public String toString() {
+    return """
+           ----------------------------
+           VENTA
+           ----------------------------
+           ID Venta : %d
+           Cliente  : %s
+           Fecha    : %s
+           Total    : %s
+           ----------------------------
+           """.formatted(
+            id,
+            id_cliente.getNombre(),
+            fecha,
+            total
+    );
+}
+    
     
 }

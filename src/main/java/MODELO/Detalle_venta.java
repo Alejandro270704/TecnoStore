@@ -4,18 +4,31 @@
  */
 package MODELO;
 
-
 public class Detalle_venta {
+
+    private int id;
     private Venta id_venta;
     private Celular id_celular;
     private int cantidad;
     private double subtotal;
 
-    public Detalle_venta(Venta id_venta, Celular id_celular, int cantidad, double subtotal) {
+    public Detalle_venta() {
+    }
+
+    public Detalle_venta(int id, Venta id_venta, Celular id_celular, int cantidad, double subtotal) {
+        this.id = id;
         this.id_venta = id_venta;
         this.id_celular = id_celular;
         this.cantidad = cantidad;
         this.subtotal = subtotal;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Venta getId_venta() {
@@ -50,7 +63,43 @@ public class Detalle_venta {
         this.subtotal = subtotal;
     }
 
-    
-    
-    
+    @Override
+public String toString() {
+    return String.format("""
+        ----------------------------
+                  VENTA
+        ----------------------------
+        Venta ID  : %s
+        Cliente   : %s
+        Fecha     : %s
+        ----------------------------
+        Celular ID: %s
+        Modelo    : %s
+        Marca     : %s
+        SO        : %s
+        Gama      : %s
+        Precio    : %s
+        Stock     : %s
+        ----------------------------
+        Cantidad  : %s
+        Subtotal  : %s
+        Total + iva: %s
+        ----------------------------
+        """,
+        id_venta.getId(),
+        id_venta.getId_cliente().getNombre(),
+        id_venta.getFecha(),
+        id_celular.getId(),
+        id_celular.getModelo_id().getNombre_modelo(),
+        id_celular.getModelo_id().getMarca_id().getNombre_marca(),
+        id_celular.getSistema_operativo() ,
+        id_celular.getGama(),
+        id_celular.getPrecio(),
+        id_celular.getStock(),
+        cantidad,
+        subtotal,
+        id_venta.getTotal()
+    );
+}
+
 }

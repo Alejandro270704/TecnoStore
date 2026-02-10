@@ -35,7 +35,8 @@ public class Main {
                     m.menucliente();
                     break;
                 case 3:
-
+                    menuVenta mv= new menuVenta();
+                    mv.menuventa();
                     break;
                 case 4:
 

@@ -81,6 +81,36 @@ public class Celular {
         this.stock = stock;
     }
 
+    public String getSistemaenum() {
+        switch (sistema_operativo) {
+            case Android:
+                return "Android";
+            case iOS:
+                return "iOS";
+            case WindowsPhone:
+                return "Windows Phone";
+            case BlackBerry:
+                return "BlackBerry";
+            case HarmonyOS:
+                return "HarmonyOS";
+
+        }
+        throw new IllegalStateException("error valor desconocido");
+    }
+
+    public String getGamaenum() {
+        switch (gama) {
+            case alta:
+                return "Alta";
+            case media:
+                return "Media";
+            case baja:
+                return "Baja";
+
+        }
+        throw new IllegalStateException("error valor desconocido");
+    }
+
     public String toString() {
         return """
            ID: %s
@@ -91,7 +121,7 @@ public class Celular {
            Precio: %s
            Stock: %s
            ---------------------------
-           """.formatted(id,modelo_id.getNombre_modelo(),modelo_id.getMarca_id().getNombre_marca(),sistema_operativo,gama,precio,stock);
+           """.formatted(id, modelo_id.getNombre_modelo(), modelo_id.getMarca_id().getNombre_marca(), sistema_operativo, gama, precio, stock);
     }
 
 }

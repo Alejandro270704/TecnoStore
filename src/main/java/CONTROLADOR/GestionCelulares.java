@@ -12,5 +12,6 @@ public interface GestionCelulares {
     void actualizar(Celular cel ,int id);
     void eliminar (int id);
     Celular buscar(int id);
+    void actualizarStock(int idCelular, int cantidadVendida);
     ArrayList<Celular>listar();
 }

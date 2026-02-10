@@ -1,8 +1,10 @@
 VISTA\Main.class
+CONTROLADOR\Ventaimpl.class
 MODELO\Celular.class
 MODELO\Persona.class
 MODELO\Detalle_venta.class
 MODELO\Modelo.class
+MODELO\Celular$1.class
 CONTROLADOR\Clienteimpl.class
 MODELO\Cliente.class
 CONTROLADOR\GestionCelulares.class
@@ -12,4 +14,5 @@ CONTROLADOR\GestionCliente.class
 MODELO\Celular$gama.class
 CONTROLADOR\Conexion.class
 MODELO\Venta.class
+CONTROLADOR\GestionVenta.class
 MODELO\Celular$sistema_operativo.class

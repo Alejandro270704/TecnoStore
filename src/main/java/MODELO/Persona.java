@@ -4,15 +4,17 @@
  */
 package MODELO;
 
-
 public class Persona {
+
     private int id;
     private String nombre;
     private String identificacion;
     private String correo;
     private String telefono;
+
     public Persona() {
     }
+
     public Persona(int id, String nombre, String identificacion, String correo, String telefono) {
         this.id = id;
         this.nombre = nombre;
@@ -20,7 +22,7 @@ public class Persona {
         this.correo = correo;
         this.telefono = telefono;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -60,5 +62,16 @@ public class Persona {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
+
+    @Override
+    public String toString() {
+        return "-----------------------------\n"
+                + "ID: " + id + "\n"
+                + "Nombre: " + nombre + "\n"
+                + "Identificación: " + identificacion + "\n"
+                + "Correo: " + correo + "\n"
+                + "Teléfono: " + telefono + "\n"
+                + "-----------------------------";
+    }
+
 }
