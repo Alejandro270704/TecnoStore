@@ -19,11 +19,11 @@ import java.util.ArrayList;
 
 public class Detalleventaimpl implements GestionDetalleVenta {
 
-    Conexion c = new Conexion();
+    
 
     @Override
     public void guardar(Detalle_venta dv) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("insert into detalle_venta(id_venta, id_celular, cantidad,subtotal) values (?,?,?,?)");
             ps.setInt(1, dv.getId_venta().getId());
             ps.setInt(2, dv.getId_celular().getId());
@@ -38,7 +38,7 @@ public class Detalleventaimpl implements GestionDetalleVenta {
 
     @Override
     public void actualizar(Detalle_venta dv, int id) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("update detalle_venta set id_venta = ?, id_celular = ?, cantidad = ?, subtotal = ? where id = ?");
             ps.setInt(1, dv.getId_venta().getId());
             ps.setInt(2, dv.getId_celular().getId());
@@ -54,7 +54,7 @@ public class Detalleventaimpl implements GestionDetalleVenta {
 
     @Override
     public void eliminar(int id) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("delete from detalle_venta where id=?");
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -66,7 +66,7 @@ public class Detalleventaimpl implements GestionDetalleVenta {
     @Override
     public Detalle_venta buscar(int id) {
         Detalle_venta dv = null;
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement(
                     "select id, id_venta, id_celular, cantidad, subtotal from detalle_venta where id=?"
             );
@@ -98,7 +98,7 @@ public class Detalleventaimpl implements GestionDetalleVenta {
     public ArrayList<Detalle_venta> listar() {
         ArrayList<Detalle_venta> ventas = new ArrayList<>();
 
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select dv.id, p.nombre, v.id, v.fecha, v.total, c.id as id_celular, c.sistema_operativo, c.gama, c.precio, c.stock, m.id as id_modelo, m.nombre_modelo, mc.nombre_marca, dv.cantidad, dv.subtotal from detalle_venta dv inner join venta v on dv.id_venta = v.id inner join cliente cl on v.id_cliente = cl.id inner join persona p on cl.id = p.id inner join celular c on dv.id_celular = c.id inner join modelo m on c.modelo_id = m.id inner join marca mc on m.marca_id = mc.id order by v.fecha desc");
             while (rs.next()) {

@@ -10,10 +10,24 @@ import java.sql.SQLException;
 
 public class Conexion {
 
+    private static Conexion conexion; 
+
+    private Conexion() {
+        
+    }
+
+    public static Conexion getconexion() {
+        if (conexion == null) {
+            conexion = new Conexion();
+        }
+        return conexion;
+    }
+
     public Connection conectar() {
         Connection c = null;
         try {
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/tecnostore_db", "root", "alejo2707");
+            c = DriverManager.getConnection( "jdbc:mysql://localhost:3306/tecnostore_db", "root", "alejo2707"
+            );
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

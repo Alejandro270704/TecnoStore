@@ -15,11 +15,11 @@ import java.util.Scanner;
 
 public class Marcaimpl implements GestionarMarca {
 
-    Conexion c = new Conexion();
+    
 
     @Override
     public void registrar(Marca m) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("insert into marca(nombre_marca) values (?)");
             ps.setString(1, m.getNombre_marca());
             ps.executeUpdate();
@@ -31,7 +31,7 @@ public class Marcaimpl implements GestionarMarca {
 
     @Override
     public void actualizar(Marca m) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("update marca set nombre_marca=? where id=?");
             ps.setString(1, m.getNombre_marca());
             ps.setInt(2, m.getId());
@@ -45,8 +45,7 @@ public class Marcaimpl implements GestionarMarca {
     @Override
     public Marca buscar(int id) {
         Marca m = null;
-        try (Connection con = c.conectar()) {
-            Statement st = con.createStatement();
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("select m.id,m.nombre_marca from marca m where id=?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -64,7 +63,7 @@ public class Marcaimpl implements GestionarMarca {
 
     @Override
     public void eliminar(int id) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("delete from marca where id=?");
             ps.setInt(1, id);
             System.out.println("""
@@ -90,7 +89,7 @@ public class Marcaimpl implements GestionarMarca {
     public ArrayList<Marca> listar() {
         ArrayList<Marca> marcas = new ArrayList<>();
 
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from marca ");
             while (rs.next()) {

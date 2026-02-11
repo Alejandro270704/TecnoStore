@@ -16,11 +16,11 @@ import java.util.Scanner;
 
 public class Modeloimpl implements GestionarModelo {
 
-    Conexion c = new Conexion();
+    
 
     @Override
     public void registrar(Modelo m) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("insert into modelo(nombre_modelo,marca_id) values (?,?)");
             ps.setString(1, m.getNombre_modelo());
             ps.setInt(2, m.getMarca_id().getId());
@@ -33,7 +33,7 @@ public class Modeloimpl implements GestionarModelo {
 
     @Override
     public void actualizar(Modelo m) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("update modelo set nombre_modelo=? ,marca_id=? where id=?");
             ps.setString(1, m.getNombre_modelo());
             ps.setInt(2, m.getMarca_id().getId());
@@ -49,7 +49,7 @@ public class Modeloimpl implements GestionarModelo {
     @Override
     public Modelo buscar(int id) {
         Modelo m = null;
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             Statement st = con.createStatement();
             PreparedStatement ps = con.prepareStatement("select m.id, m.nombre_modelo, m.marca_id from modelo m where id=?");
             ps.setInt(1, id);
@@ -70,7 +70,7 @@ public class Modeloimpl implements GestionarModelo {
 
     @Override
     public void eliminar(int id) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("delete from modelo where id=?");
             ps.setInt(1, id);
             System.out.println("""
@@ -95,7 +95,7 @@ public class Modeloimpl implements GestionarModelo {
     public ArrayList<Modelo> listar() {
         ArrayList<Modelo> modelos = new ArrayList<>();
 
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select m.id, m.nombre_modelo, mc.id, mc.nombre_marca FROM modelo m inner join marca mc on m.marca_id  = mc.id ");
             while (rs.next()) {

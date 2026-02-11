@@ -202,18 +202,17 @@ public class menuVenta {
                         break;
                     }
 
-                    subtotalNuevo = gdv.calcularSubtotal(cantidad, Cel.getPrecio());
+                    subtotalNuevo= gdv.calcularSubtotal(cantidad, Cel.getPrecio());
                     totalNuevo = gv.calculartotal(subtotalNuevo);
 
                     dv.setId_celular(Cel);
                     dv.setSubtotal(subtotalNuevo);
                     v.setTotal(totalNuevo);
-
+                    gcl.actualizarStock(Cel.getId(), cantidad);
                     gdv.actualizar(dv, dv.getId());
                     gv.actualizar(v, v.getId());
 
-                    gcl.actualizarStock(Cel.getId(), cantidad);
-
+                    
 
                     System.out.println("Celular actualizado correctamente.");
                     break;
@@ -225,7 +224,6 @@ public class menuVenta {
                     Celular celBD = gcl.buscar(cel.getId());
 
                     int stockDisponible = celBD.getStock() + cantidad;
-
 
                     if (stockDisponible < nuevaCantidad) {
                         System.out.println("No hay stock suficiente");
@@ -242,7 +240,7 @@ public class menuVenta {
                     dv.setCantidad(nuevaCantidad);
                     dv.setSubtotal(subtotalNuevo);
                     v.setTotal(totalNuevo);
-
+                    
                     cantidad = nuevaCantidad;
                     cel = celBD;
 
@@ -267,19 +265,31 @@ public class menuVenta {
             return;
         }
         Detalle_venta dv = null;
-        Venta v= null;
+        Venta v = null;
         int id = 0;
         do {
             System.out.println("Ingrese el numero de la venta a eliminar:");
             id = new Scanner(System.in).nextInt();
             dv = gdv.buscar(id);
-            v= gv.buscar(id);
+            v = gv.buscar(id);
             if (dv == null) {
                 System.out.println("No existe esta venta, intente otra vez.");
             }
 
         } while (dv == null);
-        gdv.eliminar(id);
-        gv.eliminar(id);
+        System.out.println("""
+                               ¿Desea eliminar la venta?
+                               1. Si
+                               2. No
+                               """);
+        int op = new Scanner(System.in).nextInt();
+        if (op == 1) {
+            gdv.eliminar(id);
+            gv.eliminar(id);
+            System.out.println("ELIMINACION EXITOSA!");
+        } else {
+            System.out.println("elimininacion cancelada");
+        }
+
     }
 }

@@ -17,11 +17,11 @@ import java.util.Scanner;
 
 public class Celularimpl implements GestionCelulares {
 
-    Conexion c = new Conexion();
+    
 
     @Override
     public void guardar(Celular cel) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("insert into celular(modelo_id, sistema_operativo, gama ,precio,stock) values (?,?,?,?,?)");
             ps.setInt(1, cel.getModelo_id().getId());
             ps.setString(2, cel.getSistemaenum());
@@ -37,7 +37,7 @@ public class Celularimpl implements GestionCelulares {
 
     @Override
     public void actualizar(Celular cel, int id) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("update celular set modelo_id=?, sistema_operativo=?, gama=?, precio=?, stock=?  where id=?");
             ps.setInt(1, cel.getModelo_id().getId());
             ps.setString(2, cel.getSistemaenum());
@@ -55,7 +55,7 @@ public class Celularimpl implements GestionCelulares {
 
     @Override
     public void eliminar(int id) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("delete from celular where id=?");
             ps.setInt(1, id);
             System.out.println("""
@@ -79,7 +79,7 @@ public class Celularimpl implements GestionCelulares {
     @Override
     public Celular buscar(int id) {
         Celular cel = null;
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("select c.id, c.sistema_operativo, c.gama ,c.precio,c.stock,c.modelo_id from celular c where id=?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -109,7 +109,7 @@ public class Celularimpl implements GestionCelulares {
     public ArrayList<Celular> listar() {
         ArrayList<Celular> celulares = new ArrayList<>();
 
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select c.id, c.sistema_operativo, c.gama, c.precio, c.stock, m.id as modelo_id, m.nombre_modelo, mc.id as marca_id, mc.nombre_marca from celular c inner join modelo m on c.modelo_id = m.id inner join marca mc on m.marca_id = mc.id");
             while (rs.next()) {
@@ -145,7 +145,7 @@ public class Celularimpl implements GestionCelulares {
     @Override
     public void actualizarStock(int idCelular, int cantidadVendida) {
 
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("update celular set stock = stock - ? where id = ?");
             ps.setInt(1, cantidadVendida);
             ps.setInt(2, idCelular);

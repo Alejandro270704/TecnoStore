@@ -15,11 +15,11 @@ import java.util.Scanner;
 
 public class Clienteimpl implements GestionCliente {
 
-    Conexion c = new Conexion();
+    
 
     @Override
     public void guardar(Persona p) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("insert into persona(nombre, identificacion, correo ,telefono) values (?,?,?,?)");
             ps.setString(1, p.getNombre());
             ps.setString(2, p.getIdentificacion());
@@ -47,7 +47,7 @@ public class Clienteimpl implements GestionCliente {
 
     @Override
     public void actualizar(Persona p) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("update persona set nombre=?, identificacion=?, correo=?, telefono=? where id=?");
             ps.setString(1, p.getNombre());
             ps.setString(2, p.getIdentificacion());
@@ -64,7 +64,7 @@ public class Clienteimpl implements GestionCliente {
 
     @Override
     public void eliminar(int id) {
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             PreparedStatement ps = con.prepareStatement("delete from cliente where id=?");
             ps.setInt(1, id);
             PreparedStatement ps2 = con.prepareStatement("delete from persona where id=?");
@@ -93,7 +93,7 @@ public class Clienteimpl implements GestionCliente {
     public ArrayList<Persona> listar() {
         ArrayList<Persona> personas = new ArrayList<>();
 
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select p.id,p.nombre,p.identificacion,p.correo,p.telefono from persona p inner join cliente c on p.id=c.id ");
             while (rs.next()) {
@@ -114,7 +114,7 @@ public class Clienteimpl implements GestionCliente {
     @Override
     public Persona buscar(int id) {
         Persona p = null;
-        try (Connection con = c.conectar()) {
+        try (Connection con = Conexion.getconexion().conectar()) {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select p.id, p.nombre, p.identificacion, p.correo, p.telefono from cliente c left join persona p on p.id=c.id where c.id=" + id);
             while (rs.next()) {
