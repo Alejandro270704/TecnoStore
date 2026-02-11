@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class menuReportes {
 
@@ -47,6 +46,7 @@ public class menuReportes {
                 case 1:
                     ArrayList<Celular> celulares = gmc.listar();
                     System.out.println(" Celulares con stock bajo menor a 5):");
+                    System.out.println("-----------------------------");
 
                     celulares.stream()
                             .filter(c -> c.getStock() < 5)

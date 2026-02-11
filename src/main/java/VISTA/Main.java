@@ -3,8 +3,10 @@
  */
 package VISTA;
 
-import java.util.Scanner;
+import CONTROLADOR.Detalleventaimpl;
+import CONTROLADOR.GestionDetalleVenta;
 
+import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
@@ -27,7 +29,7 @@ public class Main {
             }
             switch (op) {
                 case 1:
-                    menuPaquete mp= new menuPaquete();
+                    menuPaquete mp = new menuPaquete();
                     mp.menupaquete();
                     break;
                 case 2:
@@ -35,18 +37,19 @@ public class Main {
                     m.menucliente();
                     break;
                 case 3:
-                    menuVenta mv= new menuVenta();
+                    menuVenta mv = new menuVenta();
                     mv.menuventa();
                     break;
                 case 4:
-                    menuReportes mr= new menuReportes();
+                    menuReportes mr = new menuReportes();
                     mr.menureportes();
                     break;
                 case 5:
-
+                    menuTXT mt= new menuTXT();
+                    mt.menu();
                     break;
                 case 6:
-                    System.out.println("Gracias por usar nuestro sistema!");
+                    System.out.println("Gracias por usar nuestro sistema");
                     break;
 
             }

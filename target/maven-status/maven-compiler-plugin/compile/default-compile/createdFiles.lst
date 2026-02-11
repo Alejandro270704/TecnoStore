@@ -6,6 +6,7 @@ MODELO\Detalle_venta.class
 MODELO\Modelo.class
 MODELO\Celular$1.class
 CONTROLADOR\Clienteimpl.class
+VISTA\menuTXT.class
 MODELO\Cliente.class
 CONTROLADOR\GestionCelulares.class
 MODELO\Marca.class
