@@ -3,8 +3,7 @@
  */
 package VISTA;
 
-import CONTROLADOR.Detalleventaimpl;
-import CONTROLADOR.GestionDetalleVenta;
+
 
 import java.util.Scanner;
 public class Main {

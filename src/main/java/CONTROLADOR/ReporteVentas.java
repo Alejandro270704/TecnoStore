@@ -33,7 +33,7 @@ public class ReporteVentas implements GestionReporte {
                 bw.write("======= REPORTE DE VENTAS =======\n");
 
                 for (Detalle_venta dv : ventas) {
-                    String bloqueTexto = """
+                    String reporte = """
                         ID Detalle : %s
                         Venta ID   : %s
                         Cliente    : %s
@@ -65,7 +65,7 @@ public class ReporteVentas implements GestionReporte {
                             dv.getCantidad(),
                             dv.getSubtotal()
                         );
-                    bw.write(bloqueTexto);
+                    bw.write(reporte);
                 }
 
                 JOptionPane.showMessageDialog(frameTemporal, "Reporte guardado con éxito.");

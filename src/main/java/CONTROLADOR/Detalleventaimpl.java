@@ -54,7 +54,13 @@ public class Detalleventaimpl implements GestionDetalleVenta {
 
     @Override
     public void eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try (Connection con = c.conectar()) {
+            PreparedStatement ps = con.prepareStatement("delete from detalle_venta where id=?");
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

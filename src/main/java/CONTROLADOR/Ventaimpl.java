@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ventaimpl implements GestionVenta {
@@ -56,7 +55,7 @@ public class Ventaimpl implements GestionVenta {
             PreparedStatement ps = con.prepareStatement("delete from venta where id=?");
             ps.setInt(1, id);
             System.out.println("""
-                               ¿Desea eliminar el celular?
+                               ¿Desea eliminar la venta?
                                1. Si
                                2. No
                                """);

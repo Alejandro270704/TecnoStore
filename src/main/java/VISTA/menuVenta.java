@@ -261,5 +261,25 @@ public class menuVenta {
     }
 
     private void eliminar() {
+        ArrayList<Detalle_venta> ventas = gdv.listar();
+        ventas.forEach(v -> System.out.println(v));
+        if (ventas.isEmpty()) {
+            return;
+        }
+        Detalle_venta dv = null;
+        Venta v= null;
+        int id = 0;
+        do {
+            System.out.println("Ingrese el numero de la venta a eliminar:");
+            id = new Scanner(System.in).nextInt();
+            dv = gdv.buscar(id);
+            v= gv.buscar(id);
+            if (dv == null) {
+                System.out.println("No existe esta venta, intente otra vez.");
+            }
+
+        } while (dv == null);
+        gdv.eliminar(id);
+        gv.eliminar(id);
     }
 }

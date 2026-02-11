@@ -4,16 +4,11 @@
  */
 package VISTA;
 
-import CONTROLADOR.Celularimpl;
-import CONTROLADOR.Clienteimpl;
+
 import CONTROLADOR.Detalleventaimpl;
-import CONTROLADOR.GestionCelulares;
-import CONTROLADOR.GestionCliente;
 import CONTROLADOR.GestionDetalleVenta;
 import CONTROLADOR.GestionReporte;
-import CONTROLADOR.GestionVenta;
 import CONTROLADOR.ReporteVentas;
-import CONTROLADOR.Ventaimpl;
 import MODELO.Detalle_venta;
 import java.util.ArrayList;
 
