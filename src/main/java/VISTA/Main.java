@@ -3,9 +3,8 @@
  */
 package VISTA;
 
-
-
 import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -18,11 +17,12 @@ public class Main {
                            3.   Gestión de Ventas
                            4.   Reportes y análisis
                            5.   Generar reporte
-                           6.   salir
+                           6.   examen
+                           7.   salir
                            ===========================
                            """);
             op = new Scanner(System.in).nextInt();
-            while (op < 1 || op > 6) {
+            while (op < 1 || op > 7) {
                 System.out.println("Error, opcion no valida");
                 op = new Scanner(System.in).nextInt();
             }
@@ -44,14 +44,18 @@ public class Main {
                     mr.menureportes();
                     break;
                 case 5:
-                    menuTXT mt= new menuTXT();
+                    menuTXT mt = new menuTXT();
                     mt.menu();
                     break;
                 case 6:
+                    MenuAlertaStockService ma= new MenuAlertaStockService();
+                    ma.menuStock();
+                    break;
+                case 7:
                     System.out.println("Gracias por usar nuestro sistema");
                     break;
 
             }
-        } while (op != 6);
+        } while (op != 7);
     }
 }

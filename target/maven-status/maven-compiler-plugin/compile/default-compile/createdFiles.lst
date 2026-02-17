@@ -1,6 +1,8 @@
+VISTA\MenuAlertaStockService.class
 VISTA\Main.class
 CONTROLADOR\Ventaimpl.class
 MODELO\Celular.class
+CONTROLADOR\AlertaStockService.class
 MODELO\Persona.class
 MODELO\Detalle_venta.class
 MODELO\Modelo.class
@@ -16,4 +18,5 @@ MODELO\Celular$gama.class
 CONTROLADOR\Conexion.class
 MODELO\Venta.class
 CONTROLADOR\GestionVenta.class
+CONTROLADOR\GestionAlertaStockService.class
 MODELO\Celular$sistema_operativo.class
